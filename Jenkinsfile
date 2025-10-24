@@ -4,7 +4,7 @@ pipeline {
     triggers {
         // Trigger on Git changes (polling every minute)
         pollSCM('* * * * *')
-        // For real projecjjjts, use a webhook instead of polling
+        // For real projects, use a webhook instead of polling
     }
 
     tools {

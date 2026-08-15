@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Kubernetes secrets (never commit real values; *.example.yaml stays tracked) ###
+**/mysql-secret.yaml
+
+### Claude Code local session data ###
+.claude/

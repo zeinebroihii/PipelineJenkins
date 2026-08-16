@@ -8,8 +8,8 @@ pipeline {
     }
 
     tools {
-        maven 'Maven 3.6.3'  // Must match your Jenkins Maven name
-        jdk 'Java 17'        // Optional if you set it in Jenkins
+        maven 'Maven 3.9.11' // Align with the repo's Maven wrapper version
+        jdk 'Java 25'        // Target JDK for the upgraded runtime
     }
 
     stages {
@@ -34,10 +34,22 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
+                }
+            }
+        }
+
         stage('Package') {
             steps {
                 echo 'Creating deliverable...'
-                sh 'mvn package'
+                sh 'mvn package -DskipTests'
             }
         }
     }
